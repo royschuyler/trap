@@ -167,6 +167,25 @@ function equalOut(obj){
   return count
  }
 
+function twistIt(x,y,t){
+
+  var obj = {
+    x: x.map(a => a),
+    y: y.map(a => a),
+  }
+
+  var objOut = {
+    x: [],
+    y: []
+  }
+
+  for(i=0;i<obj.x.length;i++){
+    objOut.x.push((obj.x[i]*cos(t)) + (obj.y[i] * sin(t)));
+    objOut.y.push((-obj.x[i]*sin(t)) + (obj.y[i] * cos(t)));
+  }
+  return objOut
+}
+
 //****************************************************************************************************
 
 
@@ -244,6 +263,10 @@ function equalOut(obj){
   obj.c.y = wrapCy;
   obj.d.y = wrapDy;
 
+
+
+
+
   obj.a.x.reverse();
   obj.b.x.reverse();
   obj.c.x.reverse();
@@ -272,6 +295,7 @@ function equalOut(obj){
   var frontCount = equalOut(equalObj);
   var backCount = d-frontCount;
 
+
   obj.a.frontCount = frontCount;
   obj.a.backCount = backCount;
   obj.b.frontCount = frontCount;
@@ -280,6 +304,7 @@ function equalOut(obj){
   obj.c.backCount = backCount;
   obj.d.frontCount = frontCount;
   obj.d.backCount = backCount;
+
 
 
   //SEPARATING FRONT AND BACK IN OBJ
@@ -305,7 +330,81 @@ function equalOut(obj){
   obj.d.yFront = separateD.yFront;
   obj.d.yBack = separateD.yBack;
 
-  //console.log(obj);
+  var twistAFront = twistIt(obj.a.xFront,obj.a.yFront,twist);
+  var twistBFront = twistIt(obj.b.xFront,obj.b.yFront,twist);
+  var twistCFront = twistIt(obj.b.xFront,obj.c.yFront,twist);
+  var twistDFront = twistIt(obj.b.xFront,obj.d.yFront,twist);
+
+  var twistABack = twistIt(obj.a.xBack,obj.a.yBack,twist);
+  var twistBBack = twistIt(obj.b.xBack,obj.b.yBack,twist);
+  var twistCBack = twistIt(obj.c.xBack,obj.c.yBack,twist);
+  var twistDBack = twistIt(obj.d.xBack,obj.d.yBack,twist);
+
+
+  var finalObj = {
+    a: {
+      back: {
+        x: [],
+        y: []
+      },
+      front: {
+        x: [],
+        y: []
+      }
+    },
+    b: {
+      back: {
+        x: [],
+        y: []
+      },
+      front: {
+        x: [],
+        y: []
+      }
+    },
+    c: {
+      back: {
+        x: [],
+        y: []
+      },
+      front: {
+        x: [],
+        y: []
+      }
+    },
+    d: {
+      back: {
+        x: [],
+        y: []
+      },
+      front: {
+        x: [],
+        y: []
+      }
+    }
+  }
+
+  finalObj.a.back.x = twistABack.x;
+  finalObj.a.back.y = twistABack.y;
+  finalObj.a.front.x = twistAFront.x;
+  finalObj.a.front.y = twistAFront.y;
+
+  finalObj.b.back.x = twistBBack.x;
+  finalObj.b.back.y = twistBBack.y;
+  finalObj.b.front.x = twistBFront.x;
+  finalObj.b.front.y = twistBFront.y;
+
+  finalObj.c.back.x = twistCBack.x;
+  finalObj.c.back.y = twistCBack.y;
+  finalObj.c.front.x = twistCFront.x;
+  finalObj.c.front.y = twistCFront.y;
+
+  finalObj.d.back.x = twistDBack.x;
+  finalObj.d.back.y = twistDBack.y;
+  finalObj.d.front.x = twistDFront.x;
+  finalObj.d.front.y = twistDFront.y;
+
+
 
 
    //*************PLOT STUFF************************************
@@ -347,7 +446,7 @@ function equalOut(obj){
         m--
         //end should be 0
       }
-
+      var put = .9;
 
       buffer += 'newbuffer' + '\n';
       buffer += 'newbuffer' + '\n';
@@ -357,34 +456,40 @@ function equalOut(obj){
       //a to c
       text += 'addvalue ' + finalCount + ' ' + x1[i] + ' ' + y1[i] + '\n';
       text += 'addvalue ' + finalCount + ' ' + x2[i] + ' ' + y2[i] + '\n';
-      text += 'bcolor ' + sin(put)*.4 + ' ' + sin(put)*.5 + ' ' + sin(put)*.3 + ' ' + finalCount + '\n'
+      text += 'bcolor ' + (put)*.4 + ' ' + (put)*.5 + ' ' + (put)*.3 + ' ' + finalCount + '\n'
 
       finalCount++
 
       //c to d
       text += 'addvalue ' + finalCount + ' ' + x2[i] + ' ' + y2[i] + '\n';
       text += 'addvalue ' + finalCount + ' ' + x3[i] + ' ' + y3[i] + '\n';
-      text += 'bcolor ' + cos(put) + ' ' + sin(put) + ' ' + cos(put) + ' ' + finalCount + '\n'
+      text += 'bcolor ' + (put) + ' ' + (put) + ' ' + (put) + ' ' + finalCount + '\n'
      finalCount++
      //d to b
       text += 'addvalue ' + finalCount + ' ' + x3[i] + ' ' + y3[i] + '\n';
       text += 'addvalue ' + finalCount + ' ' + x4[i] + ' ' + y4[i] + '\n';
-      text += 'bcolor ' + sin(put) + ' ' + cos(put) + ' ' + sin(put) + ' ' + finalCount + '\n'
+      text += 'bcolor ' + (put) + ' ' + (put) + ' ' + (put) + ' ' + finalCount + '\n'
      finalCount++
      //b to a
       text += 'addvalue ' + finalCount + ' ' + x4[i] + ' ' + y4[i] + '\n';
       text += 'addvalue ' + finalCount + ' ' + x1[i] + ' ' + y1[i] + '\n';
-      text += 'bcolor ' + sin(put)*.9 + ' ' + cos(put)*.8 + ' ' + sin(put)*.7 + ' ' + finalCount + '\n'
+      text += 'bcolor ' + (put)*.9 + ' ' + (put)*.8 + ' ' + (put)*.7 + ' ' + finalCount + '\n'
 
       k++
       finalCount++
      }
   }
 
+  // if(side == 'front'){
+  //   plot(obj.a.xBack,obj.a.yBack,obj.c.xBack,obj.c.yBack,obj.d.xBack,obj.d.yBack,obj.b.xBack,obj.b.yBack);
+  // }else{
+  //   plot(obj.a.xFront,obj.a.yFront,obj.c.xFront,obj.c.yFront,obj.d.xFront,obj.d.yFront,obj.b.xFront,obj.b.yFront);
+  // }
+
   if(side == 'front'){
-    plot(obj.a.xBack,obj.a.yBack,obj.c.xBack,obj.c.yBack,obj.d.xBack,obj.d.yBack,obj.b.xBack,obj.b.yBack);
+    plot(finalObj.a.back.x,finalObj.a.back.y,finalObj.c.back.x,finalObj.c.back.y,finalObj.d.back.x,finalObj.d.back.y,finalObj.b.back.x,finalObj.b.back.y);
   }else{
-    plot(obj.a.xFront,obj.a.yFront,obj.c.xFront,obj.c.yFront,obj.d.xFront,obj.d.yFront,obj.b.xFront,obj.b.yFront);
+    plot(finalObj.a.front.x,finalObj.a.front.y,finalObj.c.front.x,finalObj.c.front.y,finalObj.d.front.x,finalObj.d.front.y,finalObj.b.front.x,finalObj.b.front.y);
   }
 
   var end = buffer + text;
@@ -392,45 +497,6 @@ function equalOut(obj){
 }
 
 
-// //END WORK
-// var addToStart = 0;
-// var addToCandD = 5;
-// var d = 200;
-// var n = 1.4;
-// var a = 1.61809332;
-// var f1 = 1;
-// var f2 = 1.1;
-// var bAndDSize = .95;
-// var twist = radians(10);
-// var baseRad = 20;
-// var baseAdd = (360/7)
-
-
-
-//    var back1 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad),radians(addToCandD),twist,'back','back');
-//    var back2 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+180),radians(addToCandD),twist,'back','back');
-//   //var back3 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*2)),radians(addToCandD),twist,'back');
-//   //var back4 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*3)),radians(addToCandD),twist,'back');
-//   //var back5 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*4)),radians(addToCandD),twist,'back');
-//   //var back6 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*5)),radians(addToCandD),twist,'back');
-//   //var back7 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*6)),radians(addToCandD),twist,'back');
-//   //var finish = back1+back2+back3+back4+back5+back6+back7;
-
-//    var front1 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad),radians(addToCandD),twist,'front','front');
-//    var front2 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+180),radians(addToCandD),twist,'front','front');
-//   //var front3 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*2)),radians(addToCandD),twist,'front');
-//   //var front4 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*3)),radians(addToCandD),twist,'front');
-//   //var front5 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*4)),radians(addToCandD),twist,'front');
-//   //var front6 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*5)),radians(addToCandD),twist,'front');
-//   //var front7 =  makeShape(d,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*6)),radians(addToCandD),twist,'front');
-//   //var finish = front1+front2+front3+front4+front5+front6+front7;
-
-
-
-
-// var finish = back1 + back2 + front1 + front2 + extra;
-
-// console.log(finish);
 
 
 
