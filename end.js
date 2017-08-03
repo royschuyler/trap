@@ -66,20 +66,38 @@ function bounceArr(bounce,d,peak){
   return arr
 }
 
+function regulate(d,topTwist){
+  var arr = [];
+
+  for(i=0;i<d;i++){
+    if(topTwist*i<=360){
+      arr.push(topTwist*i);
+    }
+    if(topTwist*i>360){
+      var multiplier = Math.floor((topTwist*i/360) % 360);
+      // console.log('second: ' + topTwist*i);
+      // console.log('mtplr: ' + multiplier);
+      arr.push((topTwist*i)-(360*multiplier))
+    }
+  }return arr
+}
 
 
-function moves(d,n,aPath,aSize,danceTPeak,bounce){
+
+function moves(d,n,aPath,aSize,danceTPeak,bounce,topTwist){
   var wrapTwistUse = 360/d;
   var use = ((danceTPeak*4)/(d))*bounce;
   var path = ellipse(d,aPath,aSize,0.6);
   var danceTUse = ((danceTPeak*2)/d)*bounce;
   var bounceArrVar = bounceArr(bounce,d,danceTPeak);
+  var danceSpinArr = regulate(d,topTwist);
 
   var obj = {
     wrapTwist: wrapTwistUse * n,
     wrapTilt: atan(path.x[n]/path.y[n]),
     wrapE: path.y[n],
-    danceT: bounceArrVar[n]
+    danceT: bounceArrVar[n],
+    topTwist: danceSpinArr[n]
   }
   return obj
 }
@@ -91,8 +109,9 @@ var aPath = 1.6;
 var aSize = .4;
 var danceTPeak = 100;
 var bounce = 1;
+var topTwist = 40;
 
-var key = moves(d,n,aPath,aSize,danceTPeak,bounce);
+var key = moves(d,n,aPath,aSize,danceTPeak,bounce,topTwist);
 console.log(key)
 
 //END WORK
@@ -102,7 +121,7 @@ var twist = key.wrapTilt;
 var baseRad = key.wrapTwist;
 //DANCE
 var tPeak = radians(key.danceT);
-var start = 0;
+var start = key.topTwist;
 
 
 
@@ -122,7 +141,7 @@ var baseAdd = (360/3);
 
 //dance
 var dDance = 100;
-var start2 = start/4;
+var start2 = -start/5;
 var t1 = radians(12);
 var t2 = radians(10);
 var t3 = radians(9);

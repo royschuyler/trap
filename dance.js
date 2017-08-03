@@ -642,37 +642,11 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
   return end
 }
 
-  // var d = 100;
-  // var tPeak = radians(5);
-  // var start = 335;
-  // var start2 = start/2;
-  // var t1 = radians(12);
-  // var t2 = radians(10);
-  // var t3 = radians(9);
-  // var t4 = radians(-4);
-  // var f = 25;
-  // var v = -8;
-  // var size = .12;
 
 
 var dance = makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size);
 return dance
 }
-
-//   var d = 100;
-//   var tPeak = radians(5);
-//   var start = 335;
-//   var start2 = start/2;
-//   var t1 = radians(12);
-//   var t2 = radians(10);
-//   var t3 = radians(9);
-//   var t4 = radians(-4);
-//   var f = 25;
-//   var v = -8;
-//   var size = .12;
-
-// var here = danceLook(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size);
-// console.log(here+extra)
 
 
 
