@@ -81,67 +81,47 @@ function regulate(d,topTwist){
     }
   }return arr
 }
+//************************************************************************************
+var bounces = 1;
+var danceBendPeak = 100;
+var pathA = 1.6;
+var pathSize = .4;
+var pathCenteredY = .6;
+var danceSpinEach = 40;
+var wrapRotations = 1;
 
-
-
-function moves(d,n,aPath,aSize,danceTPeak,bounce,topTwist){
-  var wrapTwistUse = 360/d;
-  var use = ((danceTPeak*4)/(d))*bounce;
-  var path = ellipse(d,aPath,aSize,0.6);
-  var danceTUse = ((danceTPeak*2)/d)*bounce;
-  var bounceArrVar = bounceArr(bounce,d,danceTPeak);
-  var danceSpinArr = regulate(d,topTwist);
-
-  var obj = {
-    wrapTwist: wrapTwistUse * n,
-    wrapTilt: atan(path.x[n]/path.y[n]),
-    wrapE: path.y[n],
-    danceT: bounceArrVar[n],
-    topTwist: danceSpinArr[n]
-  }
-  return obj
-}
-
-var n = 15;
-
+var ticker = 7;
 var d = 20;
-var aPath = 1.6;
-var aSize = .4;
-var danceTPeak = 100;
-var bounce = 1;
-var topTwist = 40;
+var bounceVar = bounceArr(bounces,d,danceBendPeak);
+var path = ellipse(d,pathA,pathSize,pathCenteredY);
+var danceSpinArr = regulate(d,danceSpinEach);
+var wrapTwistUse = (360/d)*wrapRotations;
 
-var key = moves(d,n,aPath,aSize,danceTPeak,bounce,topTwist);
-console.log(key)
 
-//END WORK
-//WRAP
-var a = 1/key.wrapE;
-var twist = key.wrapTilt;
-var baseRad = key.wrapTwist;
-//DANCE
-var tPeak = radians(key.danceT);
-var start = key.topTwist;
+//END WORK WRAP
+var tilt = atan(path.x[ticker]/path.y[ticker]);
+var baseRad = wrapTwistUse * ticker;
+var a = 1/path.y[ticker];
+
+//END WORK DANCE
+var tPeak = radians(bounceVar[ticker]);
+var start = danceSpinArr[ticker];
 
 
 
-
-
-
-
-
+//OTHER WRAP
 var addToStart = 0;
-var addToCandD = 5;
-var dWrap = 100;
-var n = 1.01;
+var addToCandD = 15;
+var dWrap = 500;
+var n = 1.1;
 var f1 = 1;
 var f2 = 1.1;
-var bAndDSize = .95;
+var bAndDSize = .85;
 var baseAdd = (360/3);
 
-//dance
+//OTHER DANCE
 var dDance = 100;
-var start2 = -start/5;
+var start2 = start/2;
 var t1 = radians(12);
 var t2 = radians(10);
 var t3 = radians(9);
@@ -151,29 +131,16 @@ var v = -8;
 var sized = .07;
 
 
-var back1 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad),radians(addToCandD),twist,'back','back');
-var back2 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+baseAdd*1),radians(addToCandD),twist,'back','back');
-var back3 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*2)),radians(addToCandD),twist,'back','back');
-//var back4 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*3)),radians(addToCandD),twist,'back');
-//var back5 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*4)),radians(addToCandD),twist,'back');
-//var back6 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*5)),radians(addToCandD),twist,'back');
-//var back7 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*6)),radians(addToCandD),twist,'back');
-
+var back1 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad),radians(addToCandD),tilt,'back','back');
+var back2 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+baseAdd*1),radians(addToCandD),tilt,'back','back');
+var back3 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*2)),radians(addToCandD),tilt,'back','back');
 
 var dance = danceLook(dDance,tPeak,start,start2,t1,t2,t3,t4,f,v,sized);
 
-var front1 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad),radians(addToCandD),twist,'front','front');
-var front2 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*1)),radians(addToCandD),twist,'front','front');
-var front3 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*2)),radians(addToCandD),twist,'front','front');
-//var front4 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*3)),radians(addToCandD),twist,'front');
-//var front5 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*4)),radians(addToCandD),twist,'front');
-//var front6 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*5)),radians(addToCandD),twist,'front');
-//var front7 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*6)),radians(addToCandD),twist,'front');
-
-
-
-
+var front1 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad),radians(addToCandD),tilt,'front','front');
+var front2 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*1)),radians(addToCandD),tilt,'front','front');
+var front3 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*2)),radians(addToCandD),tilt,'front','front');
 
 finish = back1 + back2 + back3 + dance + front1 + front2 + front3 + extra;
+//finish = back1 + back2 + back3 + dance + extra;
 console.log(finish)
-

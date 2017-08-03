@@ -163,7 +163,7 @@ function equalOut(obj){
 
   var arr = [obj.x1,obj.x2,obj.x3,obj.x4];
   var count = arr.reduce(function(a, b) {
-    return Math.max(a, b);
+    return Math.min(a, b);
   });
 
   return count
@@ -265,10 +265,6 @@ function twistIt(x,y,t){
   obj.c.y = wrapCy;
   obj.d.y = wrapDy;
 
-
-
-
-
   obj.a.x.reverse();
   obj.b.x.reverse();
   obj.c.x.reverse();
@@ -278,14 +274,14 @@ function twistIt(x,y,t){
   obj.c.y.reverse();
   obj.d.y.reverse();
 
-  obj.a.frontCount = getFront(obj.a.x,obj.a.y,.9).frontCount;
-  obj.a.backCount = getFront(obj.a.x,obj.a.y,.9).backCount;
-  obj.b.frontCount = getFront(obj.b.x,obj.b.y,.9*bAndDSize).frontCount;
-  obj.b.backCount = getFront(obj.b.x,obj.b.y,.9*bAndDSize).backCount;
-  obj.c.frontCount = getFront(obj.c.x,obj.c.y,.9).frontCount;
-  obj.c.backCount = getFront(obj.c.x,obj.c.y,.9).backCount;
-  obj.d.frontCount = getFront(obj.d.x,obj.d.y,.9*bAndDSize).frontCount;
-  obj.d.backCount = getFront(obj.d.x,obj.d.y,.9*bAndDSize).backCount;
+  obj.a.frontCount = getFront(obj.a.x,obj.a.y,.99).frontCount;
+  obj.a.backCount = getFront(obj.a.x,obj.a.y,.99).backCount;
+  obj.b.frontCount = getFront(obj.b.x,obj.b.y,.99*bAndDSize).frontCount;
+  obj.b.backCount = getFront(obj.b.x,obj.b.y,.99*bAndDSize).backCount;
+  obj.c.frontCount = getFront(obj.c.x,obj.c.y,.99).frontCount;
+  obj.c.backCount = getFront(obj.c.x,obj.c.y,.99).backCount;
+  obj.d.frontCount = getFront(obj.d.x,obj.d.y,.99*bAndDSize).frontCount;
+  obj.d.backCount = getFront(obj.d.x,obj.d.y,.99*bAndDSize).backCount;
 
   var equalObj = {
     x1: obj.a.frontCount,
@@ -341,7 +337,7 @@ function twistIt(x,y,t){
   var twistBBack = twistIt(obj.b.xBack,obj.b.yBack,twist);
   var twistCBack = twistIt(obj.c.xBack,obj.c.yBack,twist);
   var twistDBack = twistIt(obj.d.xBack,obj.d.yBack,twist);
-
+  //console.log(twist)
 
   var finalObj = {
     a: {
