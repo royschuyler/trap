@@ -6,11 +6,6 @@ function radians(degrees) {
   return degrees * Math.PI / 180;
 };
 
-function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,side,bigSide){
-var text = '';
-var buffer = '';
-var ringText = '';
-
 function sqrt(n){
   return Math.sqrt(n)
 }
@@ -21,6 +16,13 @@ function numbers (start, end, n){
     arr.push(i*n)
   } return arr
 }
+
+function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,side,bigSide){
+var text = '';
+var buffer = '';
+var ringText = '';
+
+
 
 function fancyNumbers (arr,f){
   var box = [];
@@ -332,8 +334,8 @@ function twistIt(x,y,t){
 
   var twistAFront = twistIt(obj.a.xFront,obj.a.yFront,twist);
   var twistBFront = twistIt(obj.b.xFront,obj.b.yFront,twist);
-  var twistCFront = twistIt(obj.b.xFront,obj.c.yFront,twist);
-  var twistDFront = twistIt(obj.b.xFront,obj.d.yFront,twist);
+  var twistCFront = twistIt(obj.c.xFront,obj.c.yFront,twist);
+  var twistDFront = twistIt(obj.d.xFront,obj.d.yFront,twist);
 
   var twistABack = twistIt(obj.a.xBack,obj.a.yBack,twist);
   var twistBBack = twistIt(obj.b.xBack,obj.b.yBack,twist);
