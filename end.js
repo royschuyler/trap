@@ -1,87 +1,6 @@
-function numbers (start, end, n){
-  var arr = [];
-  for(i = start; i < end; i++){
-    arr.push(i*n)
-  } return arr
-}
+var ticker = 13;
+var d = 20;
 
-function sin (x) {
-  return Math.sin(x)
-}
-
-function cos (x) {
-  return Math.cos(x)
-}
-
-function tan (x) {
-  return Math.tan(x)
-}
-
-function asin (x) {
-  return Math.asin(x)
-}
-
-function acos (x) {
-  return Math.cos(x)
-}
-
-function atan (x) {
-  return Math.atan(x)
-}
-
-function ellipse(d,a,size,yCentered) {
-  var e = 1/a;
-  var use = radians(360)/d;
-  var obj = {
-    x: [],
-    y: []
-  }
-  for(i=0;i<=d;i++){
-    obj.x.push(sin(i*use)*size);
-    obj.y.push((cos(i*use)*size*e)+yCentered);
-  }
-  return obj
-}
-
-function bounceArr(bounce,d,peak){
-  var use = ((peak*4)/(d))*bounce;
-  var arr = [];
-
-  var length = ((d/2)/bounce);
-  console.log(length)
-
-  for(j=0;j<bounce;j++){
-    var k=0;
-    for(i=0;i<length;i++){
-      arr.push(-peak+(k*use));
-      k++
-    }
-    var k=0;
-    for(i=0;i<length;i++){
-      arr.push(peak-(use*k));
-      k++
-    }
-  }
-  arr.push(-peak)
-  return arr
-}
-
-function regulate(d,topTwist){
-  var arr = [];
-
-  for(i=0;i<d;i++){
-    if(topTwist*i<=360){
-      arr.push(topTwist*i);
-    }
-    if(topTwist*i>360){
-      var multiplier = Math.floor((topTwist*i/360) % 360);
-      // console.log('second: ' + topTwist*i);
-      // console.log('mtplr: ' + multiplier);
-      arr.push((topTwist*i)-(360*multiplier))
-    }
-  }return arr
-}
-//************************************************************************************
 var bounces = 1;
 var danceBendPeak = 100;
 var pathA = 1.6;
@@ -90,12 +9,13 @@ var pathCenteredY = .6;
 var danceSpinEach = 40;
 var wrapRotations = 1;
 
-var ticker = 7;
-var d = 20;
+
 var bounceVar = bounceArr(bounces,d,danceBendPeak);
 var path = ellipse(d,pathA,pathSize,pathCenteredY);
 var danceSpinArr = regulate(d,danceSpinEach);
 var wrapTwistUse = (360/d)*wrapRotations;
+var plotNum = 2;
+var plotSize = plotNum.toString();
 
 
 //END WORK WRAP
@@ -107,12 +27,10 @@ var a = 1/path.y[ticker];
 var tPeak = radians(bounceVar[ticker]);
 var start = danceSpinArr[ticker];
 
-
-
 //OTHER WRAP
 var addToStart = 0;
 var addToCandD = 15;
-var dWrap = 500;
+var dWrap = 100;
 var n = 1.1;
 var f1 = 1;
 var f2 = 1.1;
@@ -141,6 +59,8 @@ var front1 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(ba
 var front2 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*1)),radians(addToCandD),tilt,'front','front');
 var front3 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*2)),radians(addToCandD),tilt,'front','front');
 
+var extra = 'blinewidth 2 all' + '\n' + 'drawframe no' + '\n' + 'asetticks x no' + '\n' + 'asetticks y no' + '\n' + 'asetminticks x no' + '\n' + 'asetminticks y no' + '\n' +'framewidth 0' + '\n' + 'bstyle yes no no no no no no yes no no 0' + '\n' + 'margins 0 0 0 0' + '\n' + 'range x '  + -plotSize + ' ' + plotSize + '\n' + 'range y ' + -plotSize + ' ' + plotSize;
+//var extra = 'blinewidth 2 all' + '\n' + 'drawframe no' + '\n' + 'asetticks x no' + '\n' + 'asetticks y no' + '\n' + 'asetminticks x no' + '\n' + 'asetminticks y no' + '\n' +'framewidth 0' + '\n' + 'bstyle yes no no no no no no yes no no 0' + '\n' + 'margins 0 0 0 0' + '\n' + 'range x -1.2 1.2' + '\n' + 'range y -1.2 1.2';
 finish = back1 + back2 + back3 + dance + front1 + front2 + front3 + extra;
-//finish = back1 + back2 + back3 + dance + extra;
+
 console.log(finish)
