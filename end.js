@@ -1,8 +1,8 @@
-var ticker = 13;
+var ticker = 0;
 var d = 20;
 
 var bounces = 1;
-var danceBendPeak = 100;
+var danceBendPeak = 10;
 var pathA = 1.6;
 var pathSize = .4;
 var pathCenteredY = .6;
@@ -60,7 +60,6 @@ var front2 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(ba
 var front3 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*2)),radians(addToCandD),tilt,'front','front');
 
 var extra = 'blinewidth 2 all' + '\n' + 'drawframe no' + '\n' + 'asetticks x no' + '\n' + 'asetticks y no' + '\n' + 'asetminticks x no' + '\n' + 'asetminticks y no' + '\n' +'framewidth 0' + '\n' + 'bstyle yes no no no no no no yes no no 0' + '\n' + 'margins 0 0 0 0' + '\n' + 'range x '  + -plotSize + ' ' + plotSize + '\n' + 'range y ' + -plotSize + ' ' + plotSize;
-//var extra = 'blinewidth 2 all' + '\n' + 'drawframe no' + '\n' + 'asetticks x no' + '\n' + 'asetticks y no' + '\n' + 'asetminticks x no' + '\n' + 'asetminticks y no' + '\n' +'framewidth 0' + '\n' + 'bstyle yes no no no no no no yes no no 0' + '\n' + 'margins 0 0 0 0' + '\n' + 'range x -1.2 1.2' + '\n' + 'range y -1.2 1.2';
 finish = back1 + back2 + back3 + dance + front1 + front2 + front3 + extra;
 
 console.log(finish)

@@ -1,34 +1,3 @@
-function numbers (start, end, n){
-  var arr = [];
-  for(i = start; i < end; i++){
-    arr.push(i*n)
-  } return arr
-}
-
-function sin (x) {
-  return Math.sin(x)
-}
-
-function cos (x) {
-  return Math.cos(x)
-}
-
-function tan (x) {
-  return Math.tan(x)
-}
-
-function asin (x) {
-  return Math.asin(x)
-}
-
-function acos (x) {
-  return Math.cos(x)
-}
-
-function atan (x) {
-  return Math.atan(x)
-}
-
 function ellipse(d,a,size,yCentered) {
   var e = 1/a;
   var use = radians(360)/d;
@@ -82,6 +51,3 @@ function regulate(d,topTwist){
   }return arr
 }
 
-function stringify(num){
-  return "'" + num + "'";
-}
