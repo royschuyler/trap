@@ -1,7 +1,3 @@
-
-
-function danceLook(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
-
 function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
   var rad90Use = radians(90)/d;
   var gap = t1-t4;
@@ -23,7 +19,6 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
   var iy1 = vm1*((fb1-v1)/(vm1-fm1))+ v1;
   var y1 = (tan(t1)*f1)-iy1;
   var yLength1 = (tan(t1)*f1);
-  document.write("yL1: " + yLength1);
   var a1;
   if(t1>0){
     a1 = abs(ix1/y1);
@@ -73,9 +68,7 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
   var iy4 = vm4*((fb4-v4)/(vm4-fm4))+ v4;
   var y4 = (tan(t4)*f4)-iy4;
   var yLength4 = (tan(t4)*f4);
-  document.write("yL4: " + yLength4);
   var yLength = (yLength1-yLength4)/2;
-  document.write("yLength: " + yLength);
   var a4;
   if(t4>0){
     a4 = abs(ix4/y4);
@@ -103,7 +96,7 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
     small: points(obj2,d,start,tPeak,topTarr,yLength,yLength1),
     vertical: points(objv,d,start,tPeak,topTarr,yLength,yLength1)
   }
-  //console.log(obj)
+
   var obj2 = {
     big: points(obj3,d,start2,tPeak,btmTarr,yLength,yLength1),
     small: points(obj4,d,start2,tPeak,btmTarr,yLength,yLength1),
@@ -112,9 +105,8 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
 
   var buffer = 'newbuffer' + '\n';
   var text = '';
-
   var minus = size*(yLength1-yLength);
-  document.write(minus);
+
   function plot(side,x1,y1,x2,y2,size,minus){
 
      //1 = white
@@ -137,12 +129,10 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
      }
 
      for(i=0;i<x1.length;i++){
-
         buffer += 'newbuffer' + '\n';
         text += 'addvalue ' + finalCount + ' ' + x1[i]*size + ' ' + (y1[i]*size-minus)+ '\n';
         text += 'addvalue ' + finalCount + ' ' + x2[i]*size + ' ' + (y2[i]*size-minus) + '\n';
         text += 'bcolor ' + color + ' ' + color + ' ' + .5 + ' ' + finalCount + '\n'
-
         finalCount++
      }
   }
@@ -153,32 +143,24 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
       plot(2,obj.vertical.x2,obj.vertical.y2,obj.vertical.x3,obj.vertical.y3,size,minus);
       plot(3,obj.vertical.x3,obj.vertical.y3,obj.vertical.x4,obj.vertical.y4,size,minus);
       plot(4,obj.vertical.x4,obj.vertical.y4,obj.vertical.x1,obj.vertical.y1,size,minus);
-      // //plot(5,obj.small.x3,obj.small.y3,obj.small.x1,obj.small.y1);
-      // //plot(5,obj.small.x2,obj.small.y2,obj.small.x4,obj.small.y4);
     }
     if(start>=45 && start<135){
       plot(4,obj.vertical.x4,obj.vertical.y4,obj.vertical.x1,obj.vertical.y1,size,minus);
       plot(1,obj.vertical.x1,obj.vertical.y1,obj.vertical.x2,obj.vertical.y2,size,minus);
       plot(2,obj.vertical.x2,obj.vertical.y2,obj.vertical.x3,obj.vertical.y3,size,minus);
       plot(3,obj.vertical.x3,obj.vertical.y3,obj.vertical.x4,obj.vertical.y4,size,minus);
-      //plot(5,obj.small.x3,obj.small.y3,obj.small.x1,obj.small.y1);
-      //plot(5,obj.small.x2,obj.small.y2,obj.small.x4,obj.small.y4);
     }
     if(start>=135 && start<225){
       plot(3,obj.vertical.x3,obj.vertical.y3,obj.vertical.x4,obj.vertical.y4,size,minus);
       plot(4,obj.vertical.x4,obj.vertical.y4,obj.vertical.x1,obj.vertical.y1,size,minus);
       plot(1,obj.vertical.x1,obj.vertical.y1,obj.vertical.x2,obj.vertical.y2,size,minus);
       plot(2,obj.vertical.x2,obj.vertical.y2,obj.vertical.x3,obj.vertical.y3,size,minus);
-      //plot(5,obj.small.x3,obj.small.y3,obj.small.x1,obj.small.y1);
-      //plot(5,obj.small.x2,obj.small.y2,obj.small.x4,obj.small.y4);
     }
     if(start>=225 && start<315){
       plot(2,obj.vertical.x2,obj.vertical.y2,obj.vertical.x3,obj.vertical.y3,size,minus);
       plot(3,obj.vertical.x3,obj.vertical.y3,obj.vertical.x4,obj.vertical.y4,size,minus);
       plot(4,obj.vertical.x4,obj.vertical.y4,obj.vertical.x1,obj.vertical.y1,size,minus);
       plot(1,obj.vertical.x1,obj.vertical.y1,obj.vertical.x2,obj.vertical.y2,size,minus);
-      //plot(5,obj.small.x3,obj.small.y3,obj.small.x1,obj.small.y1);
-      //plot(5,obj.small.x2,obj.small.y2,obj.small.x4,obj.small.y4);
     }
   }
 
@@ -188,32 +170,24 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
       plot(2,obj.vertical.x2,obj.vertical.y2,obj.vertical.x3,obj.vertical.y3,size,minus);
       plot(3,obj.vertical.x3,obj.vertical.y3,obj.vertical.x4,obj.vertical.y4,size,minus);
       plot(4,obj.vertical.x4,obj.vertical.y4,obj.vertical.x1,obj.vertical.y1,size,minus);
-      // plot(5,obj.vertical.x3,obj.vertical.y3,obj.vertical.x1,obj.vertical.y1);
-      // plot(5,obj.vertical.x2,obj.vertical.y2,obj.vertical.x4,obj.vertical.y4);
     }
     if(start>=45 && start<135){
       plot(4,obj.vertical.x4,obj.vertical.y4,obj.vertical.x1,obj.vertical.y1,size,minus);
       plot(1,obj.vertical.x1,obj.vertical.y1,obj.vertical.x2,obj.vertical.y2,size,minus);
       plot(2,obj.vertical.x2,obj.vertical.y2,obj.vertical.x3,obj.vertical.y3,size,minus);
       plot(3,obj.vertical.x3,obj.vertical.y3,obj.vertical.x4,obj.vertical.y4,size,minus);
-      // plot(5,obj.vertical.x3,obj.vertical.y3,obj.vertical.x1,obj.vertical.y1);
-      // plot(5,obj.vertical.x2,obj.vertical.y2,obj.vertical.x4,obj.vertical.y4);
     }
     if(start>=135 && start<225){
       plot(3,obj.vertical.x3,obj.vertical.y3,obj.vertical.x4,obj.vertical.y4,size,minus);
       plot(4,obj.vertical.x4,obj.vertical.y4,obj.vertical.x1,obj.vertical.y1,size,minus);
       plot(1,obj.vertical.x1,obj.vertical.y1,obj.vertical.x2,obj.vertical.y2,size,minus);
       plot(2,obj.vertical.x2,obj.vertical.y2,obj.vertical.x3,obj.vertical.y3,size,minus);
-      // plot(5,obj.vertical.x3,obj.vertical.y3,obj.vertical.x1,obj.vertical.y1);
-      // plot(5,obj.vertical.x2,obj.vertical.y2,obj.vertical.x4,obj.vertical.y4);
     }
     if(start>=225 && start<315){
       plot(2,obj.vertical.x2,obj.vertical.y2,obj.vertical.x3,obj.vertical.y3,size,minus);
       plot(3,obj.vertical.x3,obj.vertical.y3,obj.vertical.x4,obj.vertical.y4,size,minus);
       plot(4,obj.vertical.x4,obj.vertical.y4,obj.vertical.x1,obj.vertical.y1,size,minus);
       plot(1,obj.vertical.x1,obj.vertical.y1,obj.vertical.x2,obj.vertical.y2,size,minus);
-      // plot(5,obj.vertical.x3,obj.vertical.y3,obj.vertical.x1,obj.vertical.y1);
-      // plot(5,obj.vertical.x2,obj.vertical.y2,obj.vertical.x4,obj.vertical.y4);
     }
   }
 
@@ -251,32 +225,24 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
       plot(2,obj2.vertical.x2,obj2.vertical.y2,obj2.vertical.x3,obj2.vertical.y3,size,minus);
       plot(3,obj2.vertical.x3,obj2.vertical.y3,obj2.vertical.x4,obj2.vertical.y4,size,minus);
       plot(4,obj2.vertical.x4,obj2.vertical.y4,obj2.vertical.x1,obj2.vertical.y1,size,minus);
-      // //plot(5,obj2.small.x3,obj2.small.y3,obj2.small.x1,obj2.small.y1);
-      // //plot(5,obj2.small.x2,obj2.small.y2,obj2.small.x4,obj2.small.y4);
     }
     if(start2>=45 && start2<135){
       plot(4,obj2.vertical.x4,obj2.vertical.y4,obj2.vertical.x1,obj2.vertical.y1,size,minus);
       plot(1,obj2.vertical.x1,obj2.vertical.y1,obj2.vertical.x2,obj2.vertical.y2,size,minus);
       plot(2,obj2.vertical.x2,obj2.vertical.y2,obj2.vertical.x3,obj2.vertical.y3,size,minus);
       plot(3,obj2.vertical.x3,obj2.vertical.y3,obj2.vertical.x4,obj2.vertical.y4,size,minus);
-      //plot(5,obj2.small.x3,obj2.small.y3,obj2.small.x1,obj2.small.y1);
-      //plot(5,obj2.small.x2,obj2.small.y2,obj2.small.x4,obj2.small.y4);
     }
     if(start2>=135 && start2<225){
       plot(3,obj2.vertical.x3,obj2.vertical.y3,obj2.vertical.x4,obj2.vertical.y4,size,minus);
       plot(4,obj2.vertical.x4,obj2.vertical.y4,obj2.vertical.x1,obj2.vertical.y1,size,minus);
       plot(1,obj2.vertical.x1,obj2.vertical.y1,obj2.vertical.x2,obj2.vertical.y2,size,minus);
       plot(2,obj2.vertical.x2,obj2.vertical.y2,obj2.vertical.x3,obj2.vertical.y3,size,minus);
-      //plot(5,obj2.small.x3,obj2.small.y3,obj2.small.x1,obj2.small.y1);
-      //plot(5,obj2.small.x2,obj2.small.y2,obj2.small.x4,obj2.small.y4);
     }
     if(start2>=225 && start2<315){
       plot(2,obj2.vertical.x2,obj2.vertical.y2,obj2.vertical.x3,obj2.vertical.y3,size,minus);
       plot(3,obj2.vertical.x3,obj2.vertical.y3,obj2.vertical.x4,obj2.vertical.y4,size,minus);
       plot(4,obj2.vertical.x4,obj2.vertical.y4,obj2.vertical.x1,obj2.vertical.y1,size,minus);
       plot(1,obj2.vertical.x1,obj2.vertical.y1,obj2.vertical.x2,obj2.vertical.y2,size,minus);
-      //plot(5,obj2.small.x3,obj2.small.y3,obj2.small.x1,obj2.small.y1);
-      //plot(5,obj2.small.x2,obj2.small.y2,obj2.small.x4,obj2.small.y4);
     }
   }
 
@@ -286,32 +252,24 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
       plot(2,obj2.vertical.x2,obj2.vertical.y2,obj2.vertical.x3,obj2.vertical.y3,size,minus);
       plot(3,obj2.vertical.x3,obj2.vertical.y3,obj2.vertical.x4,obj2.vertical.y4,size,minus);
       plot(4,obj2.vertical.x4,obj2.vertical.y4,obj2.vertical.x1,obj2.vertical.y1,size,minus);
-      // plot(5,obj.vertical.x3,obj.vertical.y3,obj.vertical.x1,obj.vertical.y1);
-      // plot(5,obj.vertical.x2,obj.vertical.y2,obj.vertical.x4,obj.vertical.y4);
     }
     if(start2>=45 && start2<135){
       plot(4,obj2.vertical.x4,obj2.vertical.y4,obj2.vertical.x1,obj2.vertical.y1,size,minus);
       plot(1,obj2.vertical.x1,obj2.vertical.y1,obj2.vertical.x2,obj2.vertical.y2,size,minus);
       plot(2,obj2.vertical.x2,obj2.vertical.y2,obj2.vertical.x3,obj2.vertical.y3,size,minus);
       plot(3,obj2.vertical.x3,obj2.vertical.y3,obj2.vertical.x4,obj2.vertical.y4,size,minus);
-      // plot(5,obj.vertical.x3,obj.vertical.y3,obj.vertical.x1,obj.vertical.y1);
-      // plot(5,obj.vertical.x2,obj.vertical.y2,obj.vertical.x4,obj.vertical.y4);
     }
     if(start2>=135 && start2<225){
       plot(3,obj2.vertical.x3,obj2.vertical.y3,obj2.vertical.x4,obj2.vertical.y4,size,minus);
       plot(4,obj2.vertical.x4,obj2.vertical.y4,obj2.vertical.x1,obj2.vertical.y1,size,minus);
       plot(1,obj2.vertical.x1,obj2.vertical.y1,obj2.vertical.x2,obj2.vertical.y2,size,minus);
       plot(2,obj2.vertical.x2,obj2.vertical.y2,obj2.vertical.x3,obj2.vertical.y3,size,minus);
-      // plot(5,obj.vertical.x3,obj.vertical.y3,obj.vertical.x1,obj.vertical.y1);
-      // plot(5,obj.vertical.x2,obj.vertical.y2,obj.vertical.x4,obj.vertical.y4);
     }
     if(start2>=225 && start2<315){
       plot(2,obj2.vertical.x2,obj2.vertical.y2,obj2.vertical.x3,obj2.vertical.y3,size,minus);
       plot(3,obj2.vertical.x3,obj2.vertical.y3,obj2.vertical.x4,obj2.vertical.y4,size,minus);
       plot(4,obj2.vertical.x4,obj2.vertical.y4,obj2.vertical.x1,obj2.vertical.y1,size,minus);
       plot(1,obj2.vertical.x1,obj2.vertical.y1,obj2.vertical.x2,obj2.vertical.y2,size,minus);
-      // plot(5,obj.vertical.x3,obj.vertical.y3,obj.vertical.x1,obj.vertical.y1);
-      // plot(5,obj.vertical.x2,obj.vertical.y2,obj.vertical.x4,obj.vertical.y4);
     }
   }
 
@@ -346,13 +304,6 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
   ////console.log(end)
   return end
 }
-
-
-
-var dance = makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size);
-return dance
-}
-
 
 
 

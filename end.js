@@ -1,13 +1,13 @@
-var ticker = 0;
-var d = 20;
+var ticker = 10;
+var d = 30;
 
 var bounces = 1;
-var danceBendPeak = 10;
+var danceBendPeak = 60;
 var pathA = 1.6;
 var pathSize = .4;
 var pathCenteredY = .6;
-var danceSpinEach = 40;
-var wrapRotations = 1;
+var danceSpinEach = 30;
+var wrapRotations = 2;
 
 
 var bounceVar = bounceArr(bounces,d,danceBendPeak);
@@ -39,7 +39,7 @@ var baseAdd = (360/3);
 
 //OTHER DANCE
 var dDance = 100;
-var start2 = start/2;
+var start2 = -start/4;
 var t1 = radians(12);
 var t2 = radians(10);
 var t3 = radians(9);
@@ -53,7 +53,7 @@ var back1 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(bas
 var back2 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+baseAdd*1),radians(addToCandD),tilt,'back','back');
 var back3 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*2)),radians(addToCandD),tilt,'back','back');
 
-var dance = danceLook(dDance,tPeak,start,start2,t1,t2,t3,t4,f,v,sized);
+var dance = makeDancer(dDance,tPeak,start,start2,t1,t2,t3,t4,f,v,sized);
 
 var front1 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad),radians(addToCandD),tilt,'front','front');
 var front2 =  makeShape(dWrap,n,a,f1,f2,bAndDSize,radians(addToStart),radians(baseRad+(baseAdd*1)),radians(addToCandD),tilt,'front','front');
