@@ -5,7 +5,6 @@ function tNumbers (d,start,use){
   } return arr
 }
 
-
 function basePoints(d,start,a,s,cy){
   var radUse = radians(360)/d;
   var e = 1/a;
@@ -19,15 +18,12 @@ function basePoints(d,start,a,s,cy){
     m: [],
     b: []
   }
-
   for(i=0;i<small.length;i++){
     obj.p.push(radians(start)+(radUse*((d/4)*small[i])));
     obj.x.push(s*sin(obj.p[i]));
     obj.y.push(((cos(obj.p[i])*e)+cy)*s);
   }
-
   for(i=0;i<small.length;i++){
-
     if(i<3){
       obj.dif.push(obj.x[i+1]-obj.x[i]);
       obj.m.push((obj.y[i+1]-obj.y[i])/(obj.x[i+1]-obj.x[i]));
@@ -35,10 +31,8 @@ function basePoints(d,start,a,s,cy){
       obj.dif.push(obj.x[0]-obj.x[i]);
       obj.m.push((obj.y[0]-obj.y[i])/(obj.x[0]-obj.x[i]));
     }
-
-    obj.use.push(obj.dif[i]/d);
-    obj.b.push(obj.y[i]-(obj.m[i]*obj.x[i]));
-
+      obj.use.push(obj.dif[i]/d);
+      obj.b.push(obj.y[i]-(obj.m[i]*obj.x[i]));
   }return obj
 }
 
@@ -73,7 +67,6 @@ function points(objIn,d,start,tPeak,t,yLength,yLength1){
     x4: [],
     y4: []
   }
-
   for(j=0;j<arr.length;j++){
    var x = objIn.x[0] + (objIn.use[0]*arr[j]);
    var y = objIn.b[0] + (objIn.m[0]*x);
