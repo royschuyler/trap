@@ -103,7 +103,7 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
     vertical: points(objv2,d,start2,tPeak,btmTarr,yLength,yLength1)
   }
 
-  var buffer = 'newbuffer' + '\n';
+  var buffer = 'newbuffer' + '</br>';
   var text = '';
   var minus = size*(yLength1-yLength);
 
@@ -129,10 +129,10 @@ function makeDancer(d,tPeak,start,start2,t1,t2,t3,t4,f,v,size){
      }
 
      for(i=0;i<x1.length;i++){
-        buffer += 'newbuffer' + '\n';
-        text += 'addvalue ' + finalCount + ' ' + x1[i]*size + ' ' + (y1[i]*size-minus)+ '\n';
-        text += 'addvalue ' + finalCount + ' ' + x2[i]*size + ' ' + (y2[i]*size-minus) + '\n';
-        text += 'bcolor ' + color + ' ' + color + ' ' + .5 + ' ' + finalCount + '\n'
+        buffer += 'newbuffer' + '</br>';
+        text += 'addvalue ' + finalCount + ' ' + x1[i]*size + ' ' + (y1[i]*size-minus)+ '</br>';
+        text += 'addvalue ' + finalCount + ' ' + x2[i]*size + ' ' + (y2[i]*size-minus) + '</br>';
+        text += 'bcolor ' + color + ' ' + color + ' ' + .5 + ' ' + finalCount + '</br>'
         finalCount++
      }
   }

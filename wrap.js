@@ -248,30 +248,30 @@ function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,s
       }
       var put = .9;
 
-      buffer += 'newbuffer' + '\n';
-      buffer += 'newbuffer' + '\n';
-      buffer += 'newbuffer' + '\n';
-      buffer += 'newbuffer' + '\n';
-      buffer += 'newbuffer' + '\n';
+      buffer += 'newbuffer' + '</br>';
+      buffer += 'newbuffer' + '</br>';
+      buffer += 'newbuffer' + '</br>';
+      buffer += 'newbuffer' + '</br>';
+      buffer += 'newbuffer' + '</br>';
       //a to c
-      text += 'addvalue ' + finalCount + ' ' + x1[i] + ' ' + y1[i] + '\n';
-      text += 'addvalue ' + finalCount + ' ' + x2[i] + ' ' + y2[i] + '\n';
-      text += 'bcolor ' + (put)*.4 + ' ' + (put)*.5 + ' ' + (put)*.3 + ' ' + finalCount + '\n'
+      text += 'addvalue ' + finalCount + ' ' + x1[i] + ' ' + y1[i] + '</br>';
+      text += 'addvalue ' + finalCount + ' ' + x2[i] + ' ' + y2[i] + '</br>';
+      text += 'bcolor ' + (put)*.4 + ' ' + (put)*.5 + ' ' + (put)*.3 + ' ' + finalCount + '</br>'
       finalCount++
       //c to d
-      text += 'addvalue ' + finalCount + ' ' + x2[i] + ' ' + y2[i] + '\n';
-      text += 'addvalue ' + finalCount + ' ' + x3[i] + ' ' + y3[i] + '\n';
-      text += 'bcolor ' + (put) + ' ' + (put) + ' ' + (put) + ' ' + finalCount + '\n'
+      text += 'addvalue ' + finalCount + ' ' + x2[i] + ' ' + y2[i] + '</br>';
+      text += 'addvalue ' + finalCount + ' ' + x3[i] + ' ' + y3[i] + '</br>';
+      text += 'bcolor ' + (put) + ' ' + (put) + ' ' + (put) + ' ' + finalCount + '</br>'
       finalCount++
      //d to b
-      text += 'addvalue ' + finalCount + ' ' + x3[i] + ' ' + y3[i] + '\n';
-      text += 'addvalue ' + finalCount + ' ' + x4[i] + ' ' + y4[i] + '\n';
-      text += 'bcolor ' + (put) + ' ' + (put) + ' ' + (put) + ' ' + finalCount + '\n'
+      text += 'addvalue ' + finalCount + ' ' + x3[i] + ' ' + y3[i] + '</br>';
+      text += 'addvalue ' + finalCount + ' ' + x4[i] + ' ' + y4[i] + '</br>';
+      text += 'bcolor ' + (put) + ' ' + (put) + ' ' + (put) + ' ' + finalCount + '</br>'
       finalCount++
      //b to a
-      text += 'addvalue ' + finalCount + ' ' + x4[i] + ' ' + y4[i] + '\n';
-      text += 'addvalue ' + finalCount + ' ' + x1[i] + ' ' + y1[i] + '\n';
-      text += 'bcolor ' + (put)*.9 + ' ' + (put)*.8 + ' ' + (put)*.7 + ' ' + finalCount + '\n'
+      text += 'addvalue ' + finalCount + ' ' + x4[i] + ' ' + y4[i] + '</br>';
+      text += 'addvalue ' + finalCount + ' ' + x1[i] + ' ' + y1[i] + '</br>';
+      text += 'bcolor ' + (put)*.9 + ' ' + (put)*.8 + ' ' + (put)*.7 + ' ' + finalCount + '</br>'
 
       k++
       finalCount++
