@@ -7,6 +7,10 @@ function sqrt(n){
   return Math.sqrt(n)
 }
 
+function square(x){
+  return Math.pow(x,2)
+}
+
 function abs(n){
   return Math.abs(n)
 }

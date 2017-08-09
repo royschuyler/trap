@@ -1,9 +1,28 @@
 var finalCount = 0;
 
-function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,side,bigSide){
+function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,side,bigSide,pathObj,tiltObj){
   var text = '';
   var buffer = '';
   var ringText = '';
+  var type;
+
+console.log(tiltObj)
+  if(pathObj.k > 0 && pathObj.allFront == true){
+    type = 0;
+    console.log('type0')
+  }
+
+  else if(pathObj.k > 0 && pathObj.allFront == false){
+    if(tiltObj.y < pathObj.y){
+      type = 0;
+      console.log('type0!')
+    }else {
+      type = 1;
+      console.log('type1!')
+    }
+  }
+
+  console.log(pathObj)
 
   var obj = {
     a: {
@@ -96,46 +115,90 @@ function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,s
   obj.d.backCount = getFront(obj.d.x,obj.d.y,.99*bAndDSize).backCount;
 
   var equalObj = {
-  x1: obj.a.frontCount,
-  x2: obj.b.frontCount,
-  x3: obj.c.frontCount,
-  x4: obj.d.frontCount
+    x1: obj.a.frontCount,
+    x2: obj.b.frontCount,
+    x3: obj.c.frontCount,
+    x4: obj.d.frontCount
   }
 
-  var frontCount = equalOut(equalObj);
-  var backCount = d-frontCount;
+  if(type == 0){
 
-  obj.a.frontCount = frontCount;
-  obj.a.backCount = backCount;
-  obj.b.frontCount = frontCount;
-  obj.b.backCount = backCount;
-  obj.c.frontCount = frontCount;
-  obj.c.backCount = backCount;
-  obj.d.frontCount = frontCount;
-  obj.d.backCount = backCount;
+    var frontCount = equalOut(equalObj);
+    var backCount = d-frontCount;
 
-  //SEPARATING FRONT AND BACK IN OBJ
-  var separateA = separate(obj.a.x,obj.a.y,obj.a.frontCount,obj.a.backCount);
-  var separateB = separate(obj.b.x,obj.b.y,obj.b.frontCount,obj.b.backCount);
-  var separateC = separate(obj.c.x,obj.c.y,obj.c.frontCount,obj.b.backCount);
-  var separateD = separate(obj.d.x,obj.d.y,obj.c.frontCount,obj.b.backCount);
-  obj.a.xFront = separateA.xFront;
-  obj.a.xBack = separateA.xBack;
-  obj.b.xFront = separateB.xFront;
-  obj.b.xBack = separateB.xBack;
-  obj.c.xFront = separateC.xFront;
-  obj.c.xBack = separateC.xBack;
-  obj.d.xFront = separateD.xFront;
-  obj.d.xBack = separateD.xBack;
+    obj.a.frontCount = frontCount;
+    obj.a.backCount = backCount;
+    obj.b.frontCount = frontCount;
+    obj.b.backCount = backCount;
+    obj.c.frontCount = frontCount;
+    obj.c.backCount = backCount;
+    obj.d.frontCount = frontCount;
+    obj.d.backCount = backCount;
 
-  obj.a.yFront = separateA.yFront;
-  obj.a.yBack = separateA.yBack;
-  obj.b.yFront = separateB.yFront;
-  obj.b.yBack = separateB.yBack;
-  obj.c.yFront = separateC.yFront;
-  obj.c.yBack = separateC.yBack;
-  obj.d.yFront = separateD.yFront;
-  obj.d.yBack = separateD.yBack;
+    //SEPARATING FRONT AND BACK IN OBJ
+    var separateA = separate(obj.a.x,obj.a.y,obj.a.frontCount,obj.a.backCount);
+    var separateB = separate(obj.b.x,obj.b.y,obj.b.frontCount,obj.b.backCount);
+    var separateC = separate(obj.c.x,obj.c.y,obj.c.frontCount,obj.b.backCount);
+    var separateD = separate(obj.d.x,obj.d.y,obj.c.frontCount,obj.b.backCount);
+    obj.a.xFront = separateA.xFront;
+    obj.a.xBack = separateA.xBack;
+    obj.b.xFront = separateB.xFront;
+    obj.b.xBack = separateB.xBack;
+    obj.c.xFront = separateC.xFront;
+    obj.c.xBack = separateC.xBack;
+    obj.d.xFront = separateD.xFront;
+    obj.d.xBack = separateD.xBack;
+
+    obj.a.yFront = separateA.yFront;
+    obj.a.yBack = separateA.yBack;
+    obj.b.yFront = separateB.yFront;
+    obj.b.yBack = separateB.yBack;
+    obj.c.yFront = separateC.yFront;
+    obj.c.yBack = separateC.yBack;
+    obj.d.yFront = separateD.yFront;
+    obj.d.yBack = separateD.yBack;
+}
+
+  if(type == 1){
+console.log('type1')
+    var backCount = equalOut(equalObj);
+    var frontCount = d-frontCount;
+
+    obj.a.frontCount = frontCount;
+    obj.a.backCount = backCount;
+    obj.b.frontCount = frontCount;
+    obj.b.backCount = backCount;
+    obj.c.frontCount = frontCount;
+    obj.c.backCount = backCount;
+    obj.d.frontCount = frontCount;
+    obj.d.backCount = backCount;
+
+    //SEPARATING FRONT AND BACK IN OBJ
+    var separateA = separate(obj.a.x,obj.a.y,obj.a.frontCount,obj.a.backCount);
+    var separateB = separate(obj.b.x,obj.b.y,obj.b.frontCount,obj.b.backCount);
+    var separateC = separate(obj.c.x,obj.c.y,obj.c.frontCount,obj.b.backCount);
+    var separateD = separate(obj.d.x,obj.d.y,obj.c.frontCount,obj.b.backCount);
+    console.log(separateA)
+
+
+    obj.a.xBack = separateA.xFront;
+    obj.a.xFront = separateA.xBack;
+    obj.b.xBack = separateB.xFront;
+    obj.b.xFront = separateB.xBack;
+    obj.c.xBack = separateC.xFront;
+    obj.c.xFront = separateC.xBack;
+    obj.d.xBack = separateD.xFront;
+    obj.d.xFront = separateD.xBack;
+
+    obj.a.yBack = separateA.yFront;
+    obj.a.yFront = separateA.yBack;
+    obj.b.yBack = separateB.yFront;
+    obj.b.yFront = separateB.yBack;
+    obj.c.yBack = separateC.yFront;
+    obj.c.yFront = separateC.yBack;
+    obj.d.yBack = separateD.yFront;
+    obj.d.yFront = separateD.yBack;
+}
 
   var twistAFront = twistIt(obj.a.xFront,obj.a.yFront,twist);
   var twistBFront = twistIt(obj.b.xFront,obj.b.yFront,twist);
@@ -146,7 +209,6 @@ function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,s
   var twistBBack = twistIt(obj.b.xBack,obj.b.yBack,twist);
   var twistCBack = twistIt(obj.c.xBack,obj.c.yBack,twist);
   var twistDBack = twistIt(obj.d.xBack,obj.d.yBack,twist);
-  //console.log(twist)
 
   var finalObj = {
     a: {
@@ -214,8 +276,8 @@ function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,s
   //*************PLOT STUFF************************************
   var mainBack = obj.a.backCount;
   var mainFront = obj.a.frontCount;
-  var frontUse = 1/(mainFront/2);
-  var backUse = 1/(mainBack/2);
+  var frontUse = 1/(1+mainFront/2);
+  var backUse = 1/(1+mainBack/2);
 
   function plot(x1,y1,x2,y2,x3,y3,x4,y4){
      //1 = white
@@ -246,7 +308,15 @@ function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,s
         m--
         //end should be 0
       }
-      var put = .9;
+
+      if(sin(put)>0){
+        put = sin(put)
+      }else{
+        put = put
+      }
+
+      put = .7;
+      var put2 = .2
 
       buffer += 'newbuffer' + '</br>';
       buffer += 'newbuffer' + '</br>';
@@ -256,22 +326,22 @@ function makeShape(d,n,a,f1,f2,bAndDSize,baseRingStart,ringStart,aToCAdd,twist,s
       //a to c
       text += 'addvalue ' + finalCount + ' ' + x1[i] + ' ' + y1[i] + '</br>';
       text += 'addvalue ' + finalCount + ' ' + x2[i] + ' ' + y2[i] + '</br>';
-      text += 'bcolor ' + (put)*.4 + ' ' + (put)*.5 + ' ' + (put)*.3 + ' ' + finalCount + '</br>'
+      text += 'bcolor ' + (put) + ' ' + (put) + ' ' + ((put))*.9 + ' ' + finalCount + '</br>'
       finalCount++
       //c to d
       text += 'addvalue ' + finalCount + ' ' + x2[i] + ' ' + y2[i] + '</br>';
       text += 'addvalue ' + finalCount + ' ' + x3[i] + ' ' + y3[i] + '</br>';
-      text += 'bcolor ' + (put) + ' ' + (put) + ' ' + (put) + ' ' + finalCount + '</br>'
+      text += 'bcolor ' + (put) + ' ' + (put)*0.8 + ' ' + ((put))*.1 + ' ' + finalCount + '</br>'
       finalCount++
      //d to b
       text += 'addvalue ' + finalCount + ' ' + x3[i] + ' ' + y3[i] + '</br>';
       text += 'addvalue ' + finalCount + ' ' + x4[i] + ' ' + y4[i] + '</br>';
-      text += 'bcolor ' + (put) + ' ' + (put) + ' ' + (put) + ' ' + finalCount + '</br>'
+      text += 'bcolor ' + (put)*.9 + ' ' + (put) + ' ' + ((put))  + ' ' + finalCount + '</br>'
       finalCount++
      //b to a
       text += 'addvalue ' + finalCount + ' ' + x4[i] + ' ' + y4[i] + '</br>';
       text += 'addvalue ' + finalCount + ' ' + x1[i] + ' ' + y1[i] + '</br>';
-      text += 'bcolor ' + (put)*.9 + ' ' + (put)*.8 + ' ' + (put)*.7 + ' ' + finalCount + '</br>'
+      text += 'bcolor ' + (put) + ' ' + (put)*.2 + ' ' + ((put))*.9 + ' ' + finalCount + '</br>'
 
       k++
       finalCount++

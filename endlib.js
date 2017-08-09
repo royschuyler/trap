@@ -45,27 +45,98 @@ function regulate(d,topTwist){
   }return arr
 }
 
-function burst(burstStart,high1,low1,high2,burstD){
+//***********************************************************
+// d needs to be even
+// heartbeats needs to be even
+// (d/heartbeats)/2 needs to be even
+function burst(d,heartbeats,high1,low1,high2,low2){
+
   var arr = [];
-  var burstN = burstD/10;
-  var dUp = (burstD/2)-burstN;
-  var dDown = (burstN/4)*3;
-  var dEnd = (burstN/4)*5;
-  var burtUse1 = (high1-burstStart)/dUp;
-  var restUse1 = (high1-low1)/dDown;
-  var burtUse2 = (high2-low1)/dUp;
-  var restUse2 = (high2-burstStart)/dEnd;
-  for(i=0;i<dUp;i++){
-    arr.push(burstStart+(i*burtUse1));
+
+  var directionChanges = heartbeats*4;
+  var scale = d/directionChanges;
+  var upScale = Math.floor(scale * 0.85);
+  var downScale = scale+((scale - upScale)*3);
+  console.log('scale '+scale)
+  console.log('upscale '+upScale)
+  console.log('downscale '+downScale)
+
+  for(j=0;j<heartbeats;j++){
+
+    var difUse = (high1-low1)/upScale;
+    for(i=0;i<upScale;i++){
+      var ready = high1-(difUse*i);
+      arr.push(ready);
+    }
+
+    var difUse = (high2-low1)/upScale;
+    for(i=0;i<upScale;i++){
+      var ready = low1+(difUse*i);
+      arr.push(ready);
+    }
+
+    var difUse = (high2-low2)/upScale;
+    for(i=0;i<upScale;i++){
+      var ready = high2-(difUse*i);
+      arr.push(ready);
+    }
+
+    var difUse = (high1-low2)/downScale;
+    for(i=0;i<downScale;i++){
+      var ready = low2+(difUse*i);
+      arr.push(ready);
+    }
   }
-  for(i=0;i<dDown;i++){
-    arr.push(high1-(i*restUse1));
-  }
-  for(i=0;i<dUp;i++){
-    arr.push(low1+(i*burtUse2));
-  }
-  for(i=0;i<dEnd;i++){
-    arr.push(high2-(i*restUse2));
-  }return arr
+  return arr
 }
 
+function sqrt(x){
+  if(isNaN(Math.sqrt(x)) === true){
+    return 0;
+  }else{
+    return Math.sqrt(x)
+  }
+}
+
+function intersection(e,s,k){
+  var obj = {
+    x: 0,
+    y: 0,
+    t1: 0,
+    t2: 0,
+    allFront: true,
+    e: 0,
+    s: 0,
+    k: 0,
+    gap: {
+      start: 0,
+      end: 0
+    }
+  }
+
+  obj.y = ((e*sqrt((1-square(e))*square(s)+square(k)+square(e)-1)-k)/(square(e)-1));
+  obj.x = sqrt(1-square(obj.y));
+  obj.t1 = asin(obj.x/s);
+  obj.t2 = asin(-obj.x/s);
+  obj.e = e;
+  obj.s = s;
+  obj.k = k;
+
+  if(isNaN(obj.x) == true || isNaN(obj.y) == true || obj.x == 0 || obj.y == 0){
+    obj.allFront = true;
+  }else{
+    obj.allFront = false;
+  }
+
+  if(obj.allFront == false){
+      obj.gap.start = obj.t1;
+      obj.gap.end = obj.t2;
+  }
+
+
+
+
+
+
+  return obj
+}
